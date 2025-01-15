@@ -1,0 +1,205 @@
+\documentclass[a4article]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[english,russian]{babel}
+\usepackage[T2A]{fontenc}
+\input{lectures2/defines}
+
+
+\title{Группы и алгебры Ли II}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Лекция 8}
+
+
+
+\subsection*{Приведенное разложение}
+
+На прошлой лекции мы выяснили следующее:
+\begin{enumerate}
+    \item Группа Вейля $W$ действует транзитивно на множестве наборов простых корней;
+    \item Любой корень можно получить из простого действием $W$:
+    $$W(\Pi)=R;$$
+    \item Группа Вейля $W$ порождена простыми отражениями.
+\end{enumerate}
+
+Это значит, что любой набор простых корней однозначно задает систему корней.
+
+\begin{definition}
+    Пусть $w \in W$. Тогда длиной $l(w)$ элемента $w$ назовем число плоскостей $L_{\alpha}$ таких, что $C_{+}$ и $w(C_{+})$ лежат по разные стороны от $L_{\alpha}$.
+\end{definition}
+\begin{example} В обозначениях системы корней $A_3$
+    $l(s_1)=1$, $l(s_1s_2)=2$.
+\end{example}
+\begin{theorem}
+    Пусть $w = s_{i_1}\ldots s_{i_l}$ - приведенное разложение, то есть $l$ минимально. Тогда $l=l(w)$.
+\end{theorem}
+\begin{proof}
+    Обратим доказательство последней леммы предыдущей лекции. Тогда мы имели $C=s_{\beta_l}\ldots s_{\beta_1}(C_{+})$ и выяснили, что $s_{\beta_l}\ldots s_{\beta_1} = s_{i_1}\ldots s_{i_l}$, где $\beta_j = s_{i_1}\ldots s_{i_{j-1}}(\alpha_{i_j})$. Но мы помним, что $L_{\beta_j}$ - стенка камер $C_j$ и $C_{j-1}$, содержащихся в последовательности $$C_+ = C_0 \rightarrow C_1 \rightarrow \ldots \rightarrow C_l = C$$
+    Таким образом, взяв $\beta_j$, определенные по формулам выше, мы имеем оценку $l(w) \le l$. Из приведенности следует $l(w) = l$.
+\end{proof}
+\begin{exercise}
+    Доказать последнее утверждение.
+\end{exercise}
+\begin{corollary}
+    Действие группы Вейля на множестве камер Вейля свободное.
+\end{corollary}
+\begin{proof}
+    Если $w(C_+)=C_+$, то $l(w)=0$, значит $w=1$.
+\end{proof}
+\subsection*{Классификация систем корней}
+\begin{definition}
+    Приведенная система корней $R$ называется приводимой, если $R=R_1 \sqcup R_2$, $R_1 \perp R_2$. Если система корней $R$ не является приводимой, то мы называем ее неприводимой.
+\end{definition}
+\begin{lemma}
+    Если $R$ приводима и $R=R_1 \sqcup R_2$, то $\Pi=\Pi_1 \sqcup \Pi_2$. Обратно, если $\Pi=\Pi_1 \sqcup \Pi_2$, $\Pi_1 \perp \Pi_2$, то $R=R_1 \sqcup R_2$.
+\end{lemma}
+\begin{proof}
+    Первое очевидно, второе следует из того, что простые отражения, соответствующие $\Pi_1$, и простые отражения, соответствующие $\Pi_2$, коммутируют.
+\end{proof}
+\begin{definition}
+    Матрица Картана $A$ системы корней $R$ - это матрица с элементами $a_{ij} = n_{\alpha_i \alpha_j}=\frac{2(\alpha_i, \alpha_j)}{(\alpha_i, \alpha_i)}$
+\end{definition}
+\begin{lemma}
+Сформулируем свойства матрицы Картана.
+    \begin{enumerate}
+        \item Матрица Картана приводимой системы корней имеет блочно диагональный вид с блоками, соответствующими неприводимым подсистемам корней;
+        \item $a_{ii}=2$;
+        \item $a_{ij} \in \mathbb{Z}_{\le 0}$;
+        \item $a_{ij}a_{ji}=4\cos^2(\varphi)$, где $\varphi$ - угол между простыми корнями $\alpha_i$ и $\alpha_j$. Если $\varphi \ne \pi/2$, то
+        $$\frac{|\alpha_i|^2}{|\alpha_j|^2}=\frac{a_{ji}}{a_{ij}}$$
+    \end{enumerate}
+\end{lemma}
+Матрицу Картана удобно кодировать диаграммами Дынкина по следующему алгоритму.
+\begin{enumerate}
+    \item Каждому простому корню мы сопоставляем вершину диаграммы.
+    \item В зависимости от угла мы соединяем вершины некоторым количеством ребер:
+    \begin{itemize}
+        \item $\varphi = \pi/2$ - 0 ребер;
+         \item $\varphi = 2\pi/3$ - 1 ребро;
+         \item $\varphi = 3\pi/4$ - 2 ребрa;
+         \item $\varphi = 5\pi/6$ - 3 ребрa;
+    \end{itemize}
+    \item Если $|\alpha_i|>|\alpha_j|$, то ориентируем все ребра в направлении от вершины, соответствующей длинному корню, к вершине, соответствующей короткому.
+\end{enumerate}
+
+Заметим, что диаграммы Дынкина, соответствующие приводимым системам корней, несвязны и распадаются на диаграммы Дынкина, соответствующие неприводимым системам корней, которые связны. Поэтому наша задача - классифицировать связные диаграммы Дынкина.
+\begin{theorem}
+    Пусть приведенная система корней $R$ приводима. Тогда ее диаграмма Дынкина изоморфна одной из следующих диаграмм.
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width = 0.5\textwidth]{lectures2/Dynkin.jpeg}
+    \caption{Системы корней}
+    \label{fig:enter-label}
+    \end{figure}
+\end{theorem}
+\begin{proof}
+    Мы проведем классификацию в symply-laced случае, то есть, когда все ребра одинарные, чтобы понять дух доказательства. Пусть $I$ - множество вершин диаграммы Дынкина $D$. В 
+    symply-laced случае длины всех корней одинаковы. В самом деле, рассмотрим корни $\alpha_i$ и $\alpha_j$ и ограничимся на плоскость, проходящую через них. Пересечение этой плоскости с $R$ дает нам систему корней ранга 2, а поскольку угол между $\alpha_i$ и $\alpha_j$ равен $\pi/2$ или $2\pi/3$, с учетом классификации имеем $|\alpha_i| = |\alpha_2|$. Выберем нормировку так, чтобы $|\alpha_i|^2=2$, тогда $(\alpha_i, \alpha_i) = 2$, $(\alpha_i, \alpha_j) = -1$ или $0$.
+    Это все значит, что $a_{ij} = (\alpha_i, \alpha_j)$, а значит $A$ положительно определена. 
+
+    Теперь по шагам будем прояснять устройство $D$.
+    \begin{enumerate}
+        \item D не имеет циклов. В самом деле, допустим, имеется цикл $J$. Причем можно считать, что вершины цикла соединены только с соседними вершинами (иначе мы найдем цикл меньше и будем продолжать процедуру до тех пор, пока это условие не будет выполнено). Тогда $v = \sum_{j \in J}\alpha_j$ таков, что $(v,v)=0$.
+        \item Каждая вершина $D$ соединена не более чем с тремя соседними. В самом деле, предположим, имеется поддиаграмма как на рисунке.
+        \begin{figure}[h!]
+        \centering
+        \includegraphics[width = 0.3\textwidth]{lectures2/4-valent.jpeg}
+        \caption{Системы корней}
+        \label{fig:enter-label}
+        \end{figure}
+        Тогда $v = 2\alpha+\gamma_1+\gamma_2+\gamma_3+\gamma_4$ таков, что $(v,v)=0$.
+        \item $D$ содержит не более одной вершины валентности 3. В самом деле, пусть имеется две вершины валентности 3. Тогда имеется такая поддиаграмма.
+        \begin{figure}[h!]
+        \centering
+        \includegraphics[width = 0.4\textwidth]{lectures2/2 3-valent.jpeg}
+        \caption{Системы корней}
+        \label{fig:enter-label}
+        \end{figure}
+        Рассмотрим корень $\alpha = \alpha_1 + \ldots + \alpha_n$. Корни $(\alpha, \gamma_1, \ldots, \gamma_4)$ линейно независимы, значит их матрица Картана (которая в simply-laced случае совпадает с матрицей Грама) должна быть положительно определена. Но она совпадает с матрицей Картана из предыдущего пункта. 
+    \end{enumerate}
+    Итого, мы получили, что диаграмма Дынкина может иметь только такой вид.
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width = 0.4\textwidth]{final diagr.jpeg}
+        \caption{Системы корней}
+        \label{fig:enter-label}
+        \end{figure}
+    Рассмотрим корни $\beta = \sum_{i=1}^{k-1}i\beta_i$, $\gamma = \sum_{i=1}^{l-1}i\gamma_i$, $\delta = \sum_{i=1}^{m-1}i\delta_i$. Они ортогональны, а корни $\alpha, \beta, \gamma, \delta$ линейно независимы. Длина проекции вектора на подпространство меньше чем длина вектора, так что 
+    $$(\alpha, \frac{\beta}{|\beta|})^2+(\alpha, \frac{\gamma}{|\gamma|})^2+(\alpha, \frac{\delta}{|\delta|})^2<|\alpha|^2$$
+    $(\beta, \beta) = k(k-1)$ (проверьте!), $(\alpha, \beta)=-k+1$, так что последнее неравенство перепишется в виде
+    $$\frac{k-1}{k}+\frac{l-1}{l}+\frac{m-1}{m}<2$$ или
+    $$\frac{1}{k}+\frac{1}{l}+\frac{1}{m}>1$$
+    Без ограничения общности пусть $k \le l \le m$. Тогда $k < 3$.
+    \begin{itemize}
+        \item Если $k=1$, то $l,m$ любые, так что система корней $A_n$. 
+        \item Если $k=2$, то $\frac{1}{l}+\frac{1}{m}>\frac{1}{2}$. Если $l=2$, то $m$ любое, и мы получили систему корней $D_n$. Если $l=3$, то $m=3, 4, 5$ и мы получили системы корней $E_6$, $E_7$ или $E_8$.
+    \end{itemize}
+\end{proof}
+\subsection*{Классификация полупростых алгебр Ли}
+\begin{theorem}
+    Пусть $\g$ - полупростая алгебра Ли с системой корней $R \subset \mathfrak{h}^{*}$. Пусть выбрана поляризация $R = R_{+} \sqcup R_{-}$ и соответствующий ей набор простых корней $\Pi = \{\alpha_1, \ldots, \alpha_r\}$.
+    \begin{enumerate}
+        \item Подпространства $\mathfrak{n}_{\pm}=\bigoplus_{\alpha \in R_{\pm}}\g_{\alpha}$ являются подалгебрами в $\g$,
+        \item Выберем $e_i \in \g_{\alpha_i}$ и $f_i \in \g_{-\alpha_i}$ так что $(e_i, f_i) = \frac{2}{(\alpha_i, \alpha_i)}$, а $h_i = h_{\alpha_i}$ (тогда $\{e_i, h_i, f_i\}$ - это $\mathfrak{sl}_2$-тройка). Элементы $e_i$ порождают $\mathfrak{n}_{+}$, $f_i$ порождают $\mathfrak{n}_{-}$;
+        \item Пусть $a_{ij}$ - матрица Картана системы корней $R$. Тогда выполнены соотношения Серра:
+        \begin{subequations}
+            \begin{equation}
+                [h_i, h_j] = 0,
+            \end{equation}
+            \begin{equation}
+                [h_i, e_j]=a_{ij}e_j, \quad [h_i, f_j]=-a_{ij}f_j,
+            \end{equation}
+            \begin{equation}
+                [e_i, f_j] = \delta_{ij}h_i,
+            \end{equation}
+            \begin{equation}
+                (ad e_i)^{1-a_{ij}}e_j = 0,
+            \end{equation}
+            \begin{equation}
+                (ad f_i)^{1-a_{ij}}f_j = 0.
+            \end{equation}
+        \end{subequations}
+    \end{enumerate}
+\end{theorem}
+\begin{remark}
+    Поскольку $h_i$, $i \in \{1, \ldots, r\}$ образуют базис в $\mathfrak{h}$, $\{e_i, h_i, f_i\}$, $i \in \{1, \ldots, r\}$ порождают $\g$.
+\end{remark}
+\begin{proof}
+    \begin{enumerate}
+        \item Сразу следует из $[\g_{\alpha}, \g_{\beta}] = \g_{\alpha + \beta}$.
+        \item Сперва докажем
+        \begin{lemma}
+            Пусть $\alpha \in R_{+}$ и не простой, тогда найдется положительный $\beta$ и простой $\alpha_i$ такие, что $\alpha = \beta + \alpha_i$.
+        \end{lemma}
+        \begin{proof}
+            Среди простых корней найдется такой $\alpha_i$, что $(\alpha_i, \alpha) > 0$, иначе $\alpha, \alpha_1, \ldots, \alpha_r$ линейно независимы. Тогда $(\alpha, -\alpha_i) < 0$, значит $\beta = \alpha - \alpha_i$ положительный корень.
+        \end{proof}
+        Докажем утверждение для $\mathfrak{n}_{+}$ индукцией по высоте корня.
+        \begin{definition}
+            Пусть $\alpha = \sum_{i=1}^{r}n_i\alpha_i$, где $n_i \in \mathbb{Z}_{\ge 0}$, если $\alpha$ положительный или $n_i \in \mathbb{Z}_{\le 0}$, если $\alpha$ отрицательный. Тогда высота $\alpha$ $ht(\alpha) = \sum_{i=1}^{r}|n_i|$.
+        \end{definition}
+        Очевидно $\g_{\alpha_i}$ порождены $e_i$. Теперь пусть $\alpha$ непростой положительный корень веса $l$. Тогда по лемме найдется положительный корень $\beta$ веса $l-1$, такой что $\alpha = \beta + \alpha_i$. По предположению индукции $\g_{\beta}$ порождена $\{e_j\}$. Но $\g_{\alpha} = [\g_{\beta}, \g_{\alpha_i}]=[\g_{\beta}, e_i]$, значит и $\g_{\alpha}$ порождена $\{e_j\}$.
+        \item Первые 3 соотношения - это определения $\mathfrak{h}$ и $\g_{\alpha_i}$: $[h_i, e_j]=\alpha_j(h_{\alpha_i})e_j=\frac{2(\alpha_i, \alpha_j)}{(\alpha_i, \alpha_i)}e_j=a_{ij}e_j$. Четвертое следует из того, что $[e_i, f_j] \in \g_{\alpha_i - \alpha_j} = 0$ при $i \ne j$. Чтобы доказать шестое, рассмотрим $\bigoplus_{k \in \mathbb{Z}} \g_{-\alpha_j + k\alpha_i}$ как неприводимое представление $\mathfrak{sl}_2$, образованной $e_i, h_i, f_i$. Его старший вектор - $f_j$, так как $e_i.f_j = 0$, а старший вес $-a_{ij}$. Значит $e_i^{-a_{ij}+1}.f_j=0$. Пятое доказывается аналогично.
+    \end{enumerate}
+\end{proof}
+\begin{theorem}
+    \begin{enumerate}
+        \item Пусть $\g(R)$ - алгебра Ли с генераторами $e_i, h_i, f_i$, $i \in \{1, \ldots, r\}$ и соотношениями Серра. Тогда $\g(R)$ канонически изоморфна конечномерной полупростой алгебре Ли с системой корней $R$. 
+        \item Существует биекция между классами изоморфизма приведенных систем корней и классами изоморфизма конечномерных комплексных полупростых алгебр Ли. Полупростая алгебра Ли проста если и только если ее система корней неприводима.
+    \end{enumerate}
+\end{theorem}
+\begin{corollary}
+    Классы изоморфизма конечномерных простых алгебр Ли нумеруются неприводимыми системами корней.
+\end{corollary}
+\end{document}
+
+
+
+
+

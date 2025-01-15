@@ -1,0 +1,274 @@
+\documentclass[a4article]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[english,russian]{babel}
+\usepackage[T2A]{fontenc}
+\input{lectures2/defines}
+
+
+\title{Группы и алгебры Ли II}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Лекция 7}
+
+
+
+\subsection*{Абстрактные системы корней}
+Вспомним, что мы узнали про структуру полупростых алгебр Ли.
+\begin{theorem}
+    (Основная теорема структурной теории полупростых алгебр Ли)
+    \begin{enumerate}
+        \item $\mathfrak{h} = \Span_\C (h_\alpha)$, $\mathfrak{h}^* = \Span_\C (R)$.
+
+        \item Каждое корневое подпространство одномерно.
+        
+        \item Для любых двух корней $\alpha, \beta \in R$ число $\beta(h_\alpha) = 2 (\alpha, \beta) / (\alpha, \alpha)$ целое.
+
+        \item Ограничение формы Киллинга на $\Ch_\mathbb{R} := \Span_{\mathbb R} (h_\alpha)$ положительно определено.
+
+        \item Отражение корня ортогонально другому корню снова корень:
+        $$ \forall \alpha, \beta \in R, s_\beta(\alpha) = \alpha - 2 \beta \frac{(\beta, \alpha)}{(\beta, \beta)} \in R $$
+
+        \item Корни, коллинеарные $\alpha$ есть $\pm \alpha$.
+
+        \item Для корней $\alpha, \beta \not = -\alpha$ подпространство
+        $$ V = \bigoplus_{k\in\mathbb Z} \g_{\alpha +k\beta} $$
+        неприводимое $(\sl_2)_\beta$ подпредставление. 
+
+        \item Если для корней $\alpha$ и $\beta$ $\alpha+\beta$ снова корень, то $[\g_\alpha, \g_\beta] = \g_{\alpha+\beta}$.
+    \end{enumerate}
+\end{theorem}
+
+Эта теорема мотивирует нас определить систему корней как самостоятельный объект.
+
+\begin{definition}
+    Приведенная система корней это конечное подмножество $R \subset  E / \{0\}$, где $E$ - евклидово пространство (вещественное векторное пространство с положительно определенной билинейной формой), такое что:
+    \begin{enumerate}
+        \item $E=Span(R)$,
+        \item для любых двух $\alpha$, $\beta$ $\in R$
+        \begin{equation}
+            n_{\alpha\beta} = \frac{2(\alpha, \beta)}{(\beta, \beta)} \in \mathbb{Z};
+        \end{equation}
+        \item Определим отражение $s_{\alpha}: E \rightarrow E$ по формуле
+        \begin{equation}
+            s_{\alpha}(v)=v - \frac{2(\alpha, v)}{(\alpha, \alpha)} \alpha.
+        \end{equation}
+        Тогда для любых двух $\alpha$, $\beta$ $\in R$ $s_{\alpha}(\beta) \in R$;
+        \item Если $\alpha \in R$ и $c\alpha \in R$, то $c=\pm 1$.
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    Как уже говорилось, пункты 2 и 3 имеют простой геометрический смысл: $n_{\alpha \beta}$ - это удвоенное отношение проекции $\alpha$ на вектор $\beta$ к длине $\beta$, а $s_{\alpha}$ - это отражение относительно гиперплоскости, перпендикулярной $\alpha$.
+\end{remark}
+Ключевой способ изучения систем корней - это изучение их симметрий.
+\begin{definition}
+    Пусть $R_1 \subset E / \{0\}$, $R_2 \subset E / \{0\}$ - системы корней. Тогда $\phi: R_1 \rightarrow R_2$ - изоморфизм систем корней, если $\phi$ - изоморфизм векторных пространств, $\phi(R_1)=R_2$ и $n_{\phi(\alpha)\phi(\beta)}=n_{\alpha \beta}$.
+\end{definition}
+Рассмотрим систему корней $R$. Нас будет интересовать специальная подгруппа автоморфизмов $R$, называемая группой Вейля.
+\begin{definition}
+    Группа Вейля $W$ системы корней $R$ это подгруппа $GL(E)$, порожденная всеми отражениями $s_{\alpha}$.
+\end{definition}
+\begin{lemma}
+$W \subset O(E)$ и $R$ инвариантно относительно действия $W$.
+\end{lemma}
+\begin{proof}
+   Всякое отражение - это ортогональное преобразование, которое сохраняет $R$.
+\end{proof}
+\begin{corollary}
+    $W$ конечна.
+\end{corollary}
+\begin{lemma}
+Для любого $w \in W$
+    \begin{equation}
+        s_{w(\alpha)}=w s_{\alpha} w^{-1}
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    Отражение относительно плоскости, перпендикулярной $w(\alpha)$, после замены координат $w^{-1}: E \rightarrow E$ станет отражением относительно плоскости, перпендикулярной $\alpha$.
+\end{proof}
+\subsection*{Классификация систем корней ранга 2}
+На прошлой лекции мы установили, что с точностью до изоморфизма имеется 4 системы корней ранга 2: $A_1 \cup A_1$, $A_2$, $B_2$, $G_2$.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width = 0.6\textwidth]{lectures2/roots.jpeg}
+    \caption{Системы корней ранга 2}
+    \label{fig:enter-label}
+\end{figure}
+\begin{lemma}
+\label{sum_of_roots}
+    Пусть $\alpha$, $\beta$ $\in R$. Тогда если $(\alpha, \beta) < 0$, то $\alpha + \beta \in R$.
+\end{lemma}
+\begin{proof}
+    Ограничимся на плоскость, содержащую $\alpha$ и $\beta$. Тогда ее пересечение с $R$ -  система корней ранга 2. Для систем корней ранга два утверждение проверяется непосредственно.
+\end{proof}
+\subsection*{Поляризация. Простые корни}
+Пусть $t \in E$ - регулярный элемент, то есть для всякого корня $\alpha \in R$ $(t, \alpha) \ne 0$. Тогда система корней $R$ разбивается на два непересекающихся множества положительных и отрицательных корней:
+\begin{equation}
+\begin{gathered}
+    R = R_{+} \sqcup R_{-},\\
+    R_{+}=\{\alpha \in R|(\alpha, t)>0\}, \quad R_{-}=\{\alpha \in R|(\alpha, t)<0\}
+\end{gathered}
+\end{equation}
+\begin{definition}
+    Корень $\alpha \in R_{+}$ называется простым, если он не представим в виде суммы двух положительных корней. Множество простых корней будем обозначать $\Pi$.
+\end{definition}
+\begin{lemma}
+\label{decomp}
+    Всякий положительный корень представим в виде суммы простых корней.
+\end{lemma}
+\begin{proof}
+    Допустим $\alpha$ не простой (иначе мы уже победили). Тогда $\alpha = \alpha_1+\alpha_2$ для некоторых положительных $\alpha_1$ и $\alpha_2$, да таких, что $(\alpha_1, t) < (\alpha, t)$ и $(\alpha_2, t) < (\alpha, t)$. Если $\alpha_1$ и $\alpha_2$ не простые, продолжим разбивать на положительные корни. Этот процесс неизбежно закончится, поскольку скалярных произведений $(\beta, t)$, $\beta \in R_{+}$ конечное число.
+\end{proof}
+\begin{remark}
+    Неявно этим же рассуждением мы проверили, что $\Pi$ непусто.
+\end{remark}
+\begin{lemma}
+    Если $\alpha$, $\beta$ $\in \Pi$, то $(\alpha, \beta) \le 0$
+\end{lemma}
+\begin{proof}
+    Предположим, $(\alpha, \beta) > 0$. Тогда $(-\alpha, \beta) < 0$. Это значит, что $\beta'=\beta - \alpha \in R$ по лемме \ref{sum_of_roots}. Если $\beta' \in R_{+}$, то $\beta = \beta'+\alpha$, а значит не простой. Если $\beta' \in R_{-}$, то $\alpha = \beta - \beta'$, а значит не простой. Таким образом, $(\alpha, \beta) \le 0$.
+\end{proof}
+\begin{theorem}
+    Пусть выбрана поляризация $R = R_{+}\sqcup R_{-}$, $\Pi=\{\alpha_1, \ldots, \alpha_r\}$ - множество соответствующих ей простых корней. Тогда $\Pi$ - базис в $E$.
+\end{theorem}
+\begin{proof}
+    Мы знаем, что $E = Span(R)$, а по лемме \ref{decomp} $R \subset Span(\Pi)$. Это значит, что $E = Span(\Pi)$.
+    
+    Предположим, что простые корни линейно зависимы:
+    $$\sum_{i=1}^{r}c_i \alpha_i=0.$$ Это же равенство перепишем в другом виде:
+    $$\sum_{i \in I}c_i \alpha_i = \sum_{j \in J}d_j \alpha_j,$$
+    где $I = \{i|c_i > 0\}$, $J = \{j|c_j < 0\}$, $d_j = -c_j > 0$. Если $I$ или $J$ пустое, это бы значило, что какая-то сумма положительных корней с положительными коэффициентами равна 0, что невозможно. Значит $I$ и $J$ оба не пусты.
+    Умножим последнее равенство на $\sum_{i \in I}c_i \alpha_i$. Тогда левая его часть будет положительна, а правая - неположительна.
+\end{proof}
+\begin{corollary}
+    Всякий корень $\alpha$ представим в виде суммы простых корней с целыми коэффициентами. Если $\alpha \in R_{+}$, то коэффициенты положительные, если $\alpha \in R_{-}$, то коэффициенты отрицательные.
+\end{corollary}
+\subsection*{Камеры Вейля}
+
+Наша сверхзадача - классифицировать приведенные системы корней с точностью до изоморфизма. Жизнь была бы сильно проще, если бы простые корни $\Pi(t)$, получаемые по разным поляризациям, были в каком-нибудь смысле эквивалентны и определяли всю систему корней $R$.
+
+Осуществим сначала первое желание. Пусть $L_{\alpha}$ - это гиперплоскость, ортогональная корню $\alpha \in R$. Поляризация определяется с помощью вектора $t \in E$, который не ортогонален ни одному корню из $R$, то есть
+\begin{equation}
+    t \in E / \bigcup_{\alpha \in R} L_{\alpha}
+\end{equation}
+\begin{definition}
+    Камеры Вейля - это связные компоненты $(E / \bigcup_{\alpha \in R} L_{\alpha})$. 
+\end{definition}
+Пусть $C$ -  камера Вейля.
+\begin{lemma}
+Верно следующее:
+    \begin{enumerate}
+        \item $\overline{C}$ это выпуклый конус;
+        \item $\partial \overline{C}$ это объединение граней коразмерности 1, каждая из которых лежит в одной из гиперплоскостей $L_{\alpha}$ и является выпуклым конусом в ней. Такие гиперплоскости мы будем называть стенками $C$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Первая часть сразу следует из того, что $\overline{C}$ задается системой нестрогих неравенств в количестве $\#R/2$ штук (независимых из них - $rk(R)$). Вторая следует из того, что каждая грань $\overline{C}$ задается одним равенством и $\#R/2-1$ независимыми нестрогими неравенствами.
+\end{proof}
+\begin{example}
+    Рассмотрим $R=A_2$ (все примеры этого раздела будут для случая $A_2$). Камеры Вейля в этом случае задаются системой неравенств (если она имеет решение)
+    \begin{equation}
+        \begin{cases}
+            (t, \alpha_1) \lessgtr 0,\\
+            (t, \alpha_2) \lessgtr 0,\\
+            (t, \alpha_1+\alpha_2) \lessgtr 0
+        \end{cases}
+    \end{equation}
+\end{example}
+\begin{lemma}
+    Между множеством поляризаций и множеством камер Вейля можно установить взаимно-однозначное соответствие.
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}
+        \item $\phi: \{\text{камеры Вейля}\} \rightarrow \{\text{поляризации}\}$\\
+        Рассмотрим камеру Вейля $C$. Каждый ее элемент $t \in C$ вследствие выпуклости определяет одну и ту же поляризацию
+    $$R_{+}(C)=\{\alpha \in R|(\alpha, t)>0 \quad \forall t \in C\}.$$
+        \item $\varphi: \{\text{поляризации}\} \rightarrow \{\text{камеры Вейля}\}$\\
+        Пусть имеется поляризация $R=R_{+}\sqcup R_{-}$. Построим по ней камеру Вейля $$C_{+}=\{v \in E|(v, \alpha)>0 \quad \forall \alpha \in R_{+}\}=\{v \in E|(v, \alpha)>0 \quad \forall \alpha \in \Pi\}$$
+        Это множество непусто, поскольку содержит определяющий поляризацию регулярный вектор, а значит является камерой Вейля.
+    \end{enumerate}
+   Во-первых, $\varphi \circ \phi = id$ на множестве камер Вейля, поскольку $C \subseteq C_{+}$, а значит $C_{+} = C$. Во-вторых, $\phi \circ \varphi = id$ на множестве поляризаций, поскольку $R_{+} \subseteq R_{+}(C_{+})$, а значит $R_{+}(C_{+}) = R_{+}$.
+\end{proof}
+\begin{example}
+    \begin{equation}
+        C_{+}=\begin{cases}
+            (t, \alpha_1) > 0,\\
+            (t, \alpha_2) > 0,\\
+            (t, \alpha_1+\alpha_2) > 0
+        \end{cases}
+    \end{equation}
+\end{example}
+\begin{theorem}
+\label{weyltrans}
+    Группа Вейля $W$ действует на множестве камер Вейля транзитивно.
+\end{theorem}
+\begin{proof}
+    Рассмотрим две камеры Вейля $C$ и $C'$. Существует последовательность камер Вейля $$C = C_0 \rightarrow C_1 \rightarrow \ldots \rightarrow C_l = C',$$
+    такая, что камеры $C_i$ и $C_{i+1}$ смежные, то есть имеют общую гипергрань $L_{\beta_{i+1}}$. Но это значит, что $C_{i+1}=s_{\beta_{i+1}}(C_{i})$. Таким образом, $C'=s_{\beta_l}s_{\beta_{l-1}}\ldots s_{\beta_1}(C)$.
+\end{proof}
+\begin{example}
+    Пусть $R=A_2$. Заметим сначала, что смежные камеры Вейля отвечают системам неравенств, которые отличаются одним знаком. С другой стороны, смена знака соответствует отражению относительно соответствующего корня.
+    \begin{equation}
+        C=C_{+}=\begin{cases}
+            (t, \alpha_1) > 0,\\
+            (t, \alpha_2) > 0,\\
+            (t, \alpha_1+\alpha_2) > 0,
+        \end{cases}
+    \end{equation}
+    \begin{equation}
+        C'=\begin{cases}
+            (t, \alpha_1) < 0,\\
+            (t, \alpha_2) > 0,\\
+            (t, \alpha_1+\alpha_2) < 0,
+        \end{cases}
+    \end{equation}
+    Имеем $C=C_0 \rightarrow C_1 \rightarrow C_2 = C'$, где
+    \begin{equation}
+        C_1=s_{\alpha_1}(C)=\begin{cases}
+            (t, \alpha_1) < 0,\\
+            (t, \alpha_2) > 0,\\
+            (t, \alpha_1+\alpha_2) > 0,
+        \end{cases}
+    \end{equation}
+    $C' = s_{\alpha_1 + \alpha_2}(C_1)$, и в итоге
+    $C' = s_{\alpha_1 + \alpha_2}s_{\alpha_1}(C)$.
+\end{example}
+\begin{corollary}
+    Камера Вейля $C$ имеет $rk(R)$ стенок.
+\end{corollary}
+\begin{corollary}
+    Пусть $R=R_{+}\sqcup R_{-}$ и $R=R'_{+}\sqcup R'_{-}$ - две поляризации, а $\Pi$ и $\Pi'$ - соответствующие простые корни. Тогда найдется $w \in W$ такой, что $\Pi' = w(\Pi)$.
+\end{corollary}
+\begin{proof}
+    Обе поляризации и как следствие наборы простых корней соответствуют некоторым камерам Вейля $C$ и $C'$. По предыдущей теореме найдется $w \in W$ такой, что $C' = w(C)$.
+\end{proof}
+Осуществим теперь наше второе желание - убедимся, что множество простых корней полностью определяет систему корней.
+
+Зафиксируем поляризацию $R=R_{+} \sqcup R_{-}$ и соответствующие ей простые корни $\Pi = \{\alpha_1, \ldots, \alpha_r\}$. Обозначим $s_i = s_{\alpha_i}$.
+
+\begin{lemma}
+    Всякая камера Вейля $C$ может быть записана как $C=s_{i_1}s_{i_2}\ldots s_{i_l}(C_{+})$
+\end{lemma}
+\begin{proof}
+    По теореме \ref{weyltrans} $C=s_{\beta_l}\ldots s_{\beta_1}(C_{+})$, где $C_i = s_{\beta_i}\ldots s_{\beta_1}(C_{+})$, и $L_{\beta_i}$ - общая грань камер Вейля $C_{i-1}$ и $C_{i}$. Будем доказывать индукцией по $l$. В случае $l=1$ $\beta_1 = \alpha_{i_1}$, и $C = s_{i_1}(C_{+})$. Теперь пусть $C=s_{\beta_{l+1}}s_{\beta_l}\ldots s_{\beta_1}(C_{+})=s_{\beta_{l+1}}(C_l)$. По предположению индукции $C_{l}=s_{i_1}\ldots s_{i_l}(C_{+})=w(C_{+})$, значит $\beta_{l+1} = s_{i_1}\ldots s_{i_l}(\alpha_{i_{l+1}})=w(\alpha_{i_{l+1}})$. Но тогда $C=s_{w(\alpha_{i_{l+1}})}(C_l)=ws_{\alpha_{l+1}}w^{-1}w(C_{+})=s_{i_1}\ldots s_{i_l}s_{i_{l+1}}(C_{+})$.
+\end{proof}
+\begin{example}
+    $C' = s_{\alpha_1 + \alpha_2}s_{\alpha_1}(C_{+})=s_{s_{1}(\alpha_2)}s_{1}(C_{+})=s_1s_2s_1s_1(C_+)=s_1s_2(C_+)$.
+\end{example}
+\begin{theorem}
+Верно следующее.
+    \begin{enumerate}
+        \item $W(\Pi) = R$,
+        \item Группа Вейля $W$ порождена простыми отражениями $s_i$, $i \in \{1, \ldots, r\}$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Для любого $\alpha \in R$ $L_{\alpha}$ - это стенка какой-то камеры Вейля $C$. По предыдущей лемме $C=w(C_{+})$, где $w=s_{i_1}s_{i_2}\ldots s_{i_l}$, значит $\alpha = \pm w(\alpha_{j})$ и $s_{\alpha} = ws_jw^{-1}$.
+\end{proof}
+
+\end{document}

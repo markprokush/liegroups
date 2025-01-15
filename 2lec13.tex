@@ -1,0 +1,124 @@
+\documentclass[a4article]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[english,russian]{babel}
+\usepackage[T2A]{fontenc}
+\input{lectures2/defines}
+
+
+\title{Группы и алгебры Ли II}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Лекция 13. Характеры представлений}
+\subsection*{Формула Вейля для характеров}
+Вспомним определение характера представления $V$.
+\begin{definition}
+    \begin{equation}
+        ch(V)=\sum_{\lambda \in P(V)}\dim V[\lambda]e^{\lambda} 
+    \end{equation}
+\end{definition}
+Характеры конечномерных представлений, как мы знаем, живут в полиномиальной алгебре $\mathbb{C}[P]$.
+\begin{remark}
+    $\mathbb{C}[P]$ - это групповая алгебра решетки весов $P$.
+\end{remark}
+В дальнейшем нас будут интересовать характеры модулей Верма, которые не лежат в $\mathbb{C}[P]$, но лежат в $\widehat{\mathbb{C}[P]}=\{f=\sum_{\lambda \in P}c_{\lambda}e^{\lambda}|supp f \subset \bigcup_{i \in I} (\lambda_i-Q_+), |I| < \infty\} \supset \mathbb{C}[P]$, где $supp f= \{\lambda \in P|c_{\lambda} \ne 0\}$. 
+\begin{lemma}
+    \begin{equation}
+        ch(M_{\mu})=\frac{e^{\mu}}{\prod_{\alpha \in R_+}(1-e^{-\alpha})}=e^{\mu}{\prod_{\alpha \in R_+}(1+e^{-\alpha}+e^{-2\alpha}+\ldots})
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    По теореме $PBW$ 
+    базис в $M_{\mu}$ - это $\{\prod_{\alpha \in R_+}f^{l_{\alpha}}_{\alpha}v_{\mu}|l_{\alpha} \in \mathbb{Z}_+\}$, где на множестве $\{f_{\alpha}|\alpha \in R_+\}$ мы выбрали какой-то порядок.
+    
+    Найдем вес вектора $\prod_{\alpha \in R_+}f^{l_{\alpha}}_{\alpha}v_{\mu}$.
+    $$h.\prod_{\alpha \in R_+}f^{l_{\alpha}}_{\alpha}v_{\mu}=\sum_{\alpha \in R_+}-l_{\alpha}\langle h, \alpha \rangle \prod_{\alpha \in R_+}f^{l_{\alpha}}_{\alpha}v_{\mu}+\prod_{\alpha \in R_+}f^{l_{\alpha}}_{\alpha}h.v_{\mu}=\langle\mu-\sum_{\alpha \in R_+}l_{\alpha}\alpha,h \rangle \prod_{\alpha \in R_+}f^{l_{\alpha}}_{\alpha}v_{\mu}$$
+    Поэтому, чтобы найти размерность весового подпространства с весом $\mu-\lambda$, нужно посчитать число наборов $\{l_{\alpha}|\alpha \in R_+\}$ таких, что $\sum_{\alpha \in R_+}l_{\alpha}\alpha=\lambda$. Но с другой стороны, таким же способом мы находим коэффициент при $e^{-\lambda}$ в произведении ${\prod_{\alpha \in R_+}(1+e^{-\alpha}+e^{-2\alpha}+\ldots})$.
+\end{proof}
+\begin{lemma}
+    Пусть
+    \begin{equation}
+        0 \xrightarrow{\phi_0}V_1 \xrightarrow{\phi_1}\ldots \xrightarrow{\phi_{n-1}}V_n\xrightarrow{\phi_n}0
+    \end{equation}
+    точная последовательность $\g$-модулей. Тогда 
+    \begin{equation}
+        \sum_{i=0}^{n}(-1)^i ch(V_i)=0
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    Каждая из стрелок является морфизмом, значит переводит весовые подпространства веса $\lambda$ в весовые подпространства веса $\lambda$. Значит для кажого $\lambda$ имеется точная последовательность 
+    \begin{equation}
+        0 \xrightarrow{\phi_0}V_1[\lambda] \xrightarrow{\phi_1}\ldots \xrightarrow{\phi_{n-1}}V_n[\lambda]\xrightarrow{\phi_n}0
+    \end{equation}
+    $\dim V_i[\lambda]=\dim Im\phi_i+\dim Ker\phi_i$. Но $Im\phi_{i}=Ker\phi_{i+1}$, откуда $\sum_{i=0}^{n}(-1)^i \dim(V_i[\lambda])=0$. Таким образом, коэффициент при каждом $e^{\lambda}$ в $\sum_{i=0}^{n}(-1)^i ch(V_i)=0$ равен 0.
+\end{proof}
+\begin{theorem} (Формула Вейля)
+    Пусть $L_{\mu}$ неприводимое конечномерное представление старшего веса. Тогда
+    \begin{equation}
+        ch(L_{\mu})=\frac{\sum_{w \in W}(-1)^{l(w)}e^{w.\mu}}{\prod_{\alpha \in R_+}(1-e^{-\alpha})}=\frac{\sum_{w \in W}(-1)^{l(w)}e^{w(\mu+\rho)}}{\prod_{\alpha \in R_+}(e^{\alpha/2}-e^{-\alpha/2})}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Воспользуемся БГГ-резольвентой и применим предыдущую лемму:
+    $$ch(L_{\mu})=\sum_{w\in W}(-1)^{l(w)}ch(M_{w.\mu}).$$ По первой лемме получаем требуемое. Чтобы привести выражение ко второму виду, заметим, что $\prod_{\alpha \in R_+}(1-e^{-\alpha})=\prod_{\alpha \in R_+}e^{-\alpha/2}(e^{\alpha/2}-e^{-\alpha/2})=e^{-\rho}\prod_{\alpha \in R_+}(e^{\alpha/2}-e^{-\alpha/2})$, а $e^{w.\mu}=e^{-\rho}e^{w(\mu+\rho)}$.
+\end{proof}
+\begin{remark}
+    Если характеры модулей Верма лежали в $\widehat{\mathbb{C}[P]}$, то характеры $L_{\mu}$ как мы знаем лежит в $\mathbb{C}[P]$, откуда следует, что в формуле Вейля знаменатель делит числитель.
+\end{remark}
+\begin{corollary}
+    \begin{equation}
+        \prod_{\alpha \in R_+}(e^{\alpha/2}-e^{-\alpha/2})=\sum_{w\in W}(-1)^{l(w)}e^{w(\rho)}
+    \end{equation}
+\end{corollary}
+\begin{proof}
+    Применим формулу Вейля для $\mu = 0$.
+\end{proof}
+\subsection*{Размерности неприводимых представлений}
+Мы хотим найти размерности конечномерных неприводимых представлений. Для этого вспомним, что элементы $\mathbb{C}[P]$ можно мыслить как функции на торе $T=\mathfrak{h}/2\pi iQ^{\vee}$ с учетом $e^{\lambda}(h)=e^{\langle \lambda, h\rangle}$. Тогда
+\begin{equation}
+    \dim L_{\mu}=ch(L_{\mu})(0)
+\end{equation}
+Заметим однако, что $\sum_{w \in W}(-1)^{l(w)}e^{w(\mu+\rho)}(0)=\sum_{w \in W}(-1)^{l(w)}=0$. Это слегка усложняет задачу нахождения $ch(L_{\mu})(0)$, но мы это сейчас исправим. 
+\begin{definition}
+    Введем гомоморфизм $\pi_{\nu}: \mathbb{C}[P]\rightarrow \mathbb{C}[q^{\pm1}]$ по формуле $e^\lambda \mapsto q^{2(\lambda, \nu)}$. Тогда $\dim_q V=\pi_\rho(ch(V))$.
+\end{definition}
+\begin{remark}
+    $\dim_qV=\pi_\rho(ch(V))=\sum_{\lambda \in P(V)} \dim V[\lambda]q^{2(\lambda, \rho)}$, откуда $\dim_{q=1}V=\dim V$.
+\end{remark}
+\begin{theorem}
+    \begin{equation}
+        \dim_q L_{\mu} = \prod_{\alpha \in R_+}\frac{q^{(\mu+\rho, \alpha)}-q^{-(\mu+\rho, \alpha)}}{q^{(\rho, \alpha)}-q^{-(\rho, \alpha)}}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+$\dim_q L_{\mu} = \pi_{\rho}(\frac{\sum_{w \in W}(-1)^{l(w)}e^{w(\mu+\rho)}}{\prod_{\alpha \in R_+}(e^{\alpha/2}-e^{-\alpha/2})})=\frac{\sum_{w \in W}(-1)^{l(w)}q^{2(w(\mu+\rho), \rho)}}{\prod_{\alpha \in R_+}(q^{(\alpha, \rho)}-q^{-(\alpha, \rho)})}=\\
+\frac{\sum_{w \in W}(-1)^{l(w)}q^{2(\mu+\rho, w(\rho))}}{\prod_{\alpha \in R_+}(q^{(\alpha, \rho)}-q^{-(\alpha, \rho)})}=\frac{\pi_{\mu+\rho}(\sum_{w \in W}(-1)^{l(w)}e^{w(\rho)})}{\prod_{\alpha \in R_+}(q^{(\alpha, \rho)}-q^{-(\alpha, \rho)})}$, где мы использовали $W$-инвариантность скалярного произведения. Теперь в числителе используем формулу Вейля: $\prod_{\alpha \in R_+}(e^{\alpha/2}-e^{-\alpha/2})=\sum_{w\in W}(-1)^{l(w)}e^{w(\rho)}$. Тогда $\pi_{\mu+\rho}(\sum_{w \in W}(-1)^{l(w)}e^{w(\rho)}) = \prod_{\alpha \in R_+}(q^{(\mu+\rho, \alpha)}-q^{-(\mu+\rho, \alpha)})$. Собирая все вместе, получим требуемое.
+\end{proof}
+\begin{corollary}
+    \begin{equation}
+        \dim L_\mu = \prod_{\alpha \in R_+}\frac{(\mu+\rho, \alpha)}{(\rho, \alpha)}
+    \end{equation}
+\end{corollary}
+\subsection*{Кратности}
+Характеры, как и в случае конечных групп, позволяют восстановить разложение представления в прямую сумму неприводимых:
+$$V = \bigoplus_{\mu \in P_+} n_\mu V_\mu.$$
+Мы уже выяснили, что характер произвольного конечномерного представления лежит в $\mathbb{C}[P]^W$, то есть является $W$-инвариантом. Оказывается верна и такая
+\begin{theorem}
+    Характеры неприводимых конечномерных представлений $ch(L_\mu)$ образуют базис в $\mathbb{C}[P]^W$.
+\end{theorem}
+\begin{proof}
+    Сперва заметим, что выражения $o_\mu=\sum_{w\in W}e^{w(\mu)}$, $\mu \in P_+$, являются базисом в $\mathbb{C}[P]^W$. В самом деле, рассмотрим $f = \sum c_\lambda e^\lambda \in \mathbb{C}[P]^W$. Пусть $\lambda' \in suppf$. Тогда найдется единственное $w \in W$ такое, что $w.\lambda' \in P_+$. Но из $W$-инвариантности тогда следует, что $f = c_{\lambda'}o_{w.\lambda'}+\sum_{\lambda \ne \lambda'}c_\lambda e^\lambda$. Повторяя рассуждения и используя конечность суммы, заключаем, что $f$ раскладывается по элементам $o_\mu$. Линейная независимость $o_\mu$ следует из того, что каждая орбита $W$ содержит единственный элемент из $P_+$.
+
+    Таким образом, $ch(L_\mu)=\sum_{\lambda = \mu-Q_{\ge 0}} c_\lambda e^{\lambda}=o_\mu+\sum_{\lambda = \mu-Q_{>0}}c_\lambda e^\lambda=o_\mu+\sum_{\lambda \in P_+ \cap (\mu-Q_{>0})} c_\lambda o_\lambda$, где мы использовали то, что $\dim L_\mu[\mu]=1$ и то, что $o_\mu$ образуют базис в $\mathbb{C}[P]^W$. Так что мы видим, что матрица перехода от $o_\mu$ к $ch(L_\mu)$ верхнетреугольная с единицами на диагонали, значит, обратимая, и $ch(L_\mu)$ в самом деле образуют базис.
+\end{proof}
+Запишем $ch(V)=\sum_{\lambda \in P(V)} \dim V[\lambda]e^\lambda$ в базисе $ch(L_\mu)$:
+\begin{equation}
+    ch(V)=\sum_{\mu \in P_+} n_\mu ch(L_\mu)
+\end{equation}
+Для этого заметим, что $n_{\mu_{max}}=\dim V[\mu_{max}]$, где $\mu_{max}$ - старший вес. Вычтем соответствующее слагаемое и применим то же наблюдение к $ch(V)-n_{\mu_{max}}ch(L_{\mu_{max}})$ и $P(V-n_{\mu_{max}}L_{\mu_{max}})=P(V)\setminus \{\mu_{max}\}$.
+\end{document}

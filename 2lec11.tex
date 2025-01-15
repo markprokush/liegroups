@@ -1,0 +1,183 @@
+\documentclass[a4article]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[english,russian]{babel}
+\usepackage[T2A]{fontenc}
+\input{lectures2/defines}
+
+
+\title{Группы и алгебры Ли II}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Лекция 11. Представления полупростых алгебр Ли}
+
+\subsection*{Весовое разложение}
+
+На прошлых лекциях мы выяснили, что произвольная алгебра Ли имеет следующую структуру:
+\begin{equation}
+    \mathfrak{g} = \mathfrak{n}_{-}\oplus \mathfrak{h}\oplus \mathfrak{n}_{+}, 
+\end{equation}
+где $\mathfrak{n}_{\pm}=\bigoplus_{\alpha \in R_{\pm}}\g_{\alpha}$. В случае $\mathfrak{sl}_2$ $\mathfrak{n}_{-}=\mathbb{C}f$, $\mathfrak{h}=\mathbb{C}h$, $\mathfrak{n}_{+}=\mathbb{C}e$.
+
+Изучение представлений произвольной полупростой $\g$ мы как обычно начинаем с введения весовых подпространств, веса которых, как мы уже поняли в случае $\mathfrak{sl}_3$, оказываются не числами, а элементами $\mathfrak{h}^*$, поскольку одномерная подалгебра $\mathbb{C}h$ заменяется на подалгебру $\mathfrak{h}$ размерности $rk(\g)$.
+
+
+\begin{definition}
+    Весовым подпространством $V[\lambda]$, $\lambda \in \mathfrak{h}^*$ представления $V$ называется ненулевое подпространство, на котором подалгебра Картана действует диагонально:
+    \begin{equation}
+        V[\lambda]=\{v \in V|h.v=\lambda(h)v \quad \forall h \in \mathfrak{h}\}
+    \end{equation}
+    Обозначим множество весов представления $V$
+    \begin{equation}
+        P(V)=\{\lambda \in \mathfrak{h}^*|V[\lambda] \ne 0\}
+    \end{equation}
+\end{definition}
+
+
+\begin{theorem}
+    Всякое конечномерное представление полупростой $\g$ допускает весовое разложение:
+    \begin{equation}
+        V=\bigoplus_{\lambda \in P(V)} V[\lambda],
+    \end{equation}
+    причем все веса лежат на решетке весов: $P(V) \subset P$.
+\end{theorem}
+\begin{proof}
+    На самом деле, доказывая это в случае $\mathfrak{sl}_3$, мы доказали и в общем случае. Первое следует из определения подалгебры Картана, а второе из рассмотрения $V$ как представления $\mathfrak{sl}_2$-троек $\{f_\alpha, h_\alpha, e_\alpha\}$.
+\end{proof}
+В общем случае мы уже доказали и такое:
+\begin{lemma}
+    Пусть $x \in \g_{\alpha}$. Тогда $x.V[\lambda] \subset V[\lambda + \alpha]$.
+\end{lemma}
+
+Для изучение весов представления удобно ввести понятие характера.
+\begin{definition}
+    Назовем $\mathbb{C}[P]$ коммутативную алгебру над $\mathbb{C}$, порожденную формальными выражениями $e^{\lambda}$, $\lambda \in P$, с соотношениями $e^{\lambda}e^{\mu}=e^{\lambda+\mu}$, $e^0=1$.
+\end{definition}
+Элементы алгебры $\mathbb{C}[P]$ можно мыслить как полиномиальные функции на торе $T=\mathfrak{h}/2\pi iQ^{\vee}$, где 
+\begin{definition}
+    Решетка $Q^{\vee}$ - это абелева группа в $E^*$, порожденная кокорнями, то есть такими элементами $\alpha^{\vee} \in E^*$, что $\langle \alpha^{\vee}, \lambda \rangle = \frac{2(\alpha, \lambda)}{(\alpha, \alpha)}$ для всякого $\lambda \in E$.
+\end{definition}
+\begin{remark}
+    В случае, когда $E=\mathfrak{h}^*$, $\alpha^{\vee}=h_{\alpha}$.
+\end{remark}
+В самом деле, определим $e^{\lambda}: \mathfrak{h}/2\pi iQ^{\vee} \rightarrow \mathbb{C}^*$ по формуле $e^{\lambda}(h)=e^{\langle\lambda, h \rangle}$. Это определение корректно, поскольку $e^{\lambda}(h+\alpha^{\vee})=e^{\langle \lambda, h+\alpha^{\vee}\rangle}=e^{\langle\lambda, h \rangle}e^{\langle \lambda, \alpha^{\vee}\rangle}=e^{\langle\lambda, h \rangle}e^{\frac{2(\alpha, \lambda)}{(\alpha, \alpha)}}=e^{\langle\lambda, h \rangle}$ по определению решетки весов.
+
+\begin{lemma}
+    \begin{equation}
+        \mathbb{C}[P] \cong \mathbb{C}[x_1, x_1^{-1}, \ldots, x_r, x_r^{-1}], \quad r = rk(\g)
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    Рассмотрим отображение $\mathbb{C}[P]\rightarrow \mathbb{C}[x_1, x_1^{-1}, \ldots, x_r, x_r^{-1}]$, $e^{\omega_i} \mapsto x_i$, где $\omega_i$, $i=1, \ldots, r$ - фундаментальные веса. Это сюръективный гомоморфизм с единичным ядром, поскольку $\omega_i$ - базис решетки весов.
+\end{proof}
+\begin{definition}
+    Характером представления $V$ называется элемент $\mathbb{C}[P]$
+    \begin{equation}
+        ch(V)=\sum_{\lambda \in P(V)}(\dim V[\lambda])e^{\lambda}
+    \end{equation}
+\end{definition}
+\begin{remark}
+    Заметим, что для $h \in \mathfrak{h}$ $ch(V)(h)=\sum_{\lambda \in P(V)}(\dim V[\lambda])e^{\lambda(h)}=tr_V\exp(h)$, что согласуется с определением характера представления группы.
+\end{remark}
+\begin{theorem}
+    Пусть $V$ - конечномерное представление полупростой алгебры Ли $\g$ с системой корней $R$. Набор весов $P(V)$ и размерность весовых подпространств инвариантны относительно действия группы Вейля.
+\end{theorem}
+\begin{proof}
+    Достаточно проверить инвариантность относительно простых отражений $s_i$. Пусть $\lambda(h_{i})=\langle \lambda, \alpha^{\vee}\rangle = n \in \mathbb{Z}_+$. Тогда пользуясь знанием о представлениях $\mathfrak{sl}_2$-тройки $\{e_i, h_i, f_i\}$ (как и в случае $\mathfrak{sl}_3$) получаем, что $\lambda - n\alpha_i \in P(V)$ и $e_i^n: V[\lambda] \rightarrow V[\lambda-n\alpha_i]$, $f_i^n: V[\lambda-n\alpha_i] \rightarrow V[\lambda]$ - изоморфизмы. Но $\lambda-n\alpha_i = \lambda - \frac{2(\lambda, \alpha_i)}{(\alpha_i, \alpha_i)}=s_i(\lambda)$ - вес, отраженный относительно стенки камеры Вейля $(\lambda, \alpha_i)=0$. Таким образом, простые отражения переводят веса в веса, и соответствующие размерности весовых подпространств не меняются.
+\end{proof}
+\begin{corollary}
+    Характер $ch(V)$ инвариантен относительно действия группы Вейля $W(R)$ на $\mathbb{C}[P]$, заданного по формуле
+    \begin{equation}
+        w(e^{\lambda})=e^{w(\lambda)}.
+    \end{equation}
+\end{corollary}
+\subsection*{Представления старшего веса}
+
+В этом разделе мы повторим результаты, которые получили для $\mathfrak{sl}_3$, в случае произвольной полупростой алгебры Ли.
+\begin{definition}
+    Представление $V$ называется представлением старшего веса $\mu$, если оно порождено ненулевым $v \in V[\mu]$, таким что $\forall x \in \mathfrak{n}_+$ $x.v=0$.
+\end{definition}
+\begin{theorem}
+    Всякое неприводимое конечномерное представление $V$ полупростой $\g$ - представление старшего веса.
+\end{theorem}
+\begin{proof}
+    Наличие старшего веса снова следует из установления на весах порядка с помощью скалярного произведения с регулярным вектором $t \in \mathfrak{h}^*$. То, что $V=\g.v$ сразу следует из неприводимости $V$.
+\end{proof}
+
+Напрашивается введение универсального представления старшего веса - модуля Верма. Рассмотрим борелевскую подалгебру $\mathfrak{b}=\mathfrak{h}\otimes \mathfrak{n_+}$. Пусть $\mathbb{C}_{\mu}$ - это одномерное представление $\mathfrak{b}$: $\forall v_{\mu}\in \mathbb{C}_{\mu}$
+\begin{equation}
+\begin{gathered}
+    \forall h \in \mathfrak{h} \quad h.v_{\mu}=\mu(h)v_{\mu}, \\
+    \forall x \in \mathfrak{n_+} \quad 
+    x.v_{\mu}=0
+\end{gathered}
+\end{equation}
+
+\begin{definition}
+    Модуль Верма $M_{\mu} = U\g \otimes_{U_{\mathfrak{b}}}\mathbb{C}_{\mu} $
+\end{definition}
+\begin{theorem}
+    \begin{enumerate}
+        \item Любой вектор $v \in M_{\mu}$ можно единственным образом записать в виде $v = uv_{\mu}$, где $u \in U\mathfrak{n}_-$, $v_{\mu} \in \mathbb{C}_{\mu}$. Иначе говоря, $U\mathfrak{n}_- \rightarrow M_{\mu}$, $u \mapsto uv_{\mu}$ - изоморфизм векторных пространств.
+        \item $M_{\mu}$ допускает весовое разложение: $M_{\mu}=\bigoplus M_{\mu}[\lambda]$, где веса $\lambda = \mu - \sum_{}n_i\alpha_i$, $n_i \in \mathbb{Z}_+$.
+        \item $\dim M_{\mu}[\mu]=1$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    По теореме Пуанкаре-Биркгофа-Витта $M_{\mu}=U\g \otimes_{U_{\mathfrak{b}}}\mathbb{C}_{\mu}=U\mathfrak{n}_-\otimes U\mathfrak{b}\otimes_{U\mathfrak{b}}\mathbb{C}_{\mu}=U\mathfrak{n}_-\otimes\mathbb{C}_{\mu}$. Отсюда следует первое утверждение. Второе и третье сразу следуют из первого.
+\end{proof}
+
+Модуль Верма универсален в следующем смысле:
+\begin{lemma}
+    Пусть $V$ - представление старшего веса $\mu$. Тогда $V \cong M_{\mu}/W$ для некоторого подпредставления $W \subset M_{\mu}$.
+\end{lemma}
+\begin{proof}
+    Рассмотрим отображение $M_{\mu} \rightarrow V$, $x\otimes v_{\lambda} \mapsto x.v_{\lambda}$. Это сюръективный морфизм представлений. Тогда его ядро $W$ - тоже представление, и $V = M_{\mu}/W$, что и требовалось.
+\end{proof}
+
+\begin{corollary}
+    Пусть $V$ - представление старшего веса $\mu$.
+    \begin{enumerate}
+        \item Любой вектор $v \in V$ можно записать в виде $v = uv_{\mu}$, где $u \in U\mathfrak{n}_-$. Иначе говоря, $U\mathfrak{n}_- \rightarrow V$, $u \mapsto uv_{\mu}$ - сюръективное отображение между векторными пространствами.
+        \item $V$ допускает весовое разложение: $V=\bigoplus V[\lambda]$, где веса $\lambda = \mu - \sum_{}n_i\alpha_i$, $n_i \in \mathbb{Z}_+$.
+        \item $\dim V[\mu]=1$.
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    Первое сразу следует из предыдущей теоремы. Второе последует следующим образом. Пусть $W \subset M_{\mu}$ - снова ядро морфизма $M_{\lambda} \rightarrow V$. Тогда $W$ тоже допускает весовое разложение: $W = \bigoplus W[\lambda]$, $W[\lambda] = W \cap M_{\mu}[\lambda]$. Это означает, что $V=M_{\mu}/W$ тоже допускает весовое разложение, причем $P(V) \subset P(M_{\mu})$. Третье следует из того, что $\dim V[\mu] \le \dim M_{\mu}[\mu]$.
+\end{proof}
+\begin{corollary}
+    Старший вес единственный.
+\end{corollary}
+\subsection*{Классификация неприводимых представлений}
+\begin{theorem}
+    Для каждого $\mu \in \mathfrak{h}^*$ существует единственное неприводимое представление старшего веса $\mu$ - $L_{\mu}$. 
+\end{theorem}
+\begin{proof}
+    Все подпредставления $W \subset M_{\mu}$ допускают весовое разложение: $W = \bigoplus W[\lambda]$, $W[\lambda] = W \cap M_{\mu}[\lambda]$. Выберем из них только те, у которых $W[\mu]=0$. Сложив их, мы получим максимальное подпредставление, которое не содержится ни в каком другом. Отфакторизовав по нему $M_{\mu}$, получим требуемое неприводимое представление $L_{\mu}$. 
+\end{proof}
+\begin{corollary}
+    Всякое неприводимое конечномерное представление изоморфно некоторому $L_{\mu}$.
+\end{corollary}
+\begin{proof}
+    Следует из того, что всякое неприводимое конечномерное представление - это представление старшего веса.
+\end{proof}
+
+Следующий естественный вопрос - при каких $\mu$ представление $L_{\mu}$ конечномерно. В случае $\mathfrak{sl}_3$ мы выяснили, что при фиксированной поляризации $\mu$ должен лежать: 
+\begin{enumerate}
+    \item на решетке весов $P$;
+    \item в замыкании камеры Вейля $\overline{C}_+$,
+\end{enumerate}
+или, эквивалентно, $\langle \mu, \alpha^{\vee} \rangle \in \mathbb{Z}_+$ для всех $\alpha \in R_+$.
+\begin{definition}
+    Вес $\mu$ называется доминантным интегральным, если $\langle \mu, \alpha^{\vee} \rangle \in \mathbb{Z}_+$ для всех $\alpha \in R_+$.
+\end{definition}
+\begin{theorem}
+    Неприводимое представление $L_{\mu}$ конечномерно если и только если $\mu$ - доминантный интегральный вес.
+\end{theorem}
+\end{document}
